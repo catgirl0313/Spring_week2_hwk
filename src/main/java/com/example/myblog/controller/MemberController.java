@@ -1,9 +1,9 @@
 package com.example.myblog.controller;
 
 
-import com.example.myblog.dto.JoinRequestDto;
-import com.example.myblog.dto.LoginRequestDto;
-import com.example.myblog.service.MemberService;
+import com.example.myblog.member.dto.JoinRequestDto;
+import com.example.myblog.member.dto.LoginRequestDto;
+import com.example.myblog.member.service.MemberService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

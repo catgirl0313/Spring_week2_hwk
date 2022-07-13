@@ -1,14 +1,16 @@
-package com.example.myblog.domain;
+package com.example.myblog.member.domain;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 //Entity는 JPA가 관리할 객체,
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Member {
 

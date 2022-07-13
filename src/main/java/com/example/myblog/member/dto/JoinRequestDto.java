@@ -1,6 +1,6 @@
-package com.example.myblog.dto;
+package com.example.myblog.member.dto;
 
-import com.example.myblog.domain.Member;
+import com.example.myblog.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
