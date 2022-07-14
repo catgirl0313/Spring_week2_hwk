@@ -34,6 +34,7 @@ dependencies {
     // Thymeleaf (뷰 템플릿 엔진)
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     testImplementation group: 'com.h2database', name: 'h2'
+
     // 회원 가입 페이지
 
 
