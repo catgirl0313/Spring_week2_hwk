@@ -1,5 +1,7 @@
-package com.example.myblog.member.domain;
+package com.example.myblog.comment;
 
+import com.example.myblog.article.Articles;
+import com.example.myblog.member.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -11,23 +13,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Setter
+
 @Getter
-//Entity는 JPA가 관리할 객체,
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Member {
+public class Comments {
 
-    @Id  //ID 할당 방법 1.직접 넣는 방식 (Setter, 생성자) 2.(JPA나)DB에게 할당 책임을 전가. (@GenerateValue)
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // mysql 은 identity. auto는 안 맞을 경우도 있어.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
-    private String nickname;
+    private String content;
+
+    //writer -> 회원이랑 직접 연관string 이 아니라.
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne // 댓글 - > 게시글
+    @JoinColumn(name = "articles_id")
+    private Articles articles;
 
 
-    //@enablejpaauditing 필요. 왜?
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -44,13 +52,16 @@ public class Member {
     @Column(insertable = false)
     private String updatedBy;
 
-
-    public Member(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
+    public Comments() {
     }
 
-    public Member() {
+    private Comments(String content, Member member, Articles articles) {
+        this.content = content;
+        this.member = member;
+        this.articles = articles;
+    }
+
+    public static Comments createComments(String content, Member member, Articles articles){
+        return new Comments(content, member, articles);
     }
 }

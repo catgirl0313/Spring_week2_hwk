@@ -1,4 +1,4 @@
-package com.example.myblog.member.domain;
+package com.example.myblog.article;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,18 +16,18 @@ import java.time.LocalDateTime;
 //Entity는 JPA가 관리할 객체,
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Member {
+public class Articles {
 
-    @Id  //ID 할당 방법 1.직접 넣는 방식 (Setter, 생성자) 2.(JPA나)DB에게 할당 책임을 전가. (@GenerateValue)
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // mysql 은 identity. auto는 안 맞을 경우도 있어.
+    @Id
+    //
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
-    private String nickname;
+    private String title;
+    private String writer;
+    private String content;
 
 
-    //@enablejpaauditing 필요. 왜?
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -44,13 +44,12 @@ public class Member {
     @Column(insertable = false)
     private String updatedBy;
 
-
-    public Member(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
+    public Articles(String title, String writer, String content) {
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
     }
 
-    public Member() {
+    public Articles() {
     }
 }
